@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📘 Prince Library</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            user-select: none;
+        }
+        .navbar {
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            overflow: hidden;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+        .navbar a {
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: bold;
+        }
+        .navbar a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: yellowgreen;
+            transition: 1s;
+            border-radius: 23px;
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+        .nav-links a {
+            margin-left: 10px;
+        }
+
+        /* Menu icon for small screens */
+        .menu-icon {
+            display: none;
+            cursor: pointer;
+            font-size: 24px;
+            color: white;
+        }
+        .menu-icon:hover {
+            color: yellowgreen;
+        }
+        .hidden-div {
+            display: none;
+            position: absolute;
+            top: 86px;
+            right: 20px;
+            background-color: white;
+            border: 1px solid greenyellow;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            background: radial-gradient(#2575fc, #6a11cb);
+            position: fixed;
+            z-index: 1000;
+            width: 250px;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .nav-links {
+                display: none; /* Hide nav links by default */
+                flex-direction: column;
+                width: 100%;
+            }
+            .nav-links a {
+                width: 100%;
+                text-align: left;
+                padding: 10px 0;
+                margin-left: 0;
+            }
+            .menu-icon {
+                display: block;
+            }
+            .hidden-div {
+                width: 90%;
+                right: 5%;
+                top: 70px;
+                left: 5%;
+            }
+        }
+
+        /* Show the nav links when menu icon is clicked */
+        .show-nav .nav-links {
+            display: flex;
+        }
+
+        .content {
+            margin-top: 100px;
+            border-left: grey;
+            border-right: grey;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='images/Screenshot_2024-09-04_225741-removebg-preview.png') }}" alt="Network Error" style="height: 70px;">
+        </div>
+        <div class="menu-icon" id="menu-icon">
+            <i class="fas fa-ellipsis-v"></i>
+        </div>
+        <div class="nav-links" id="nav-links">
+            <a href="/">Home</a>
+            <a href="/information">Information</a>
+            <a href="/location">Location</a>
+            <a href="/about" style="color: orange; font-weight: 120px;">About us</a>
+            <div class="tooltip" style="cursor: pointer;">
+                <img src="{{ url_for('static', filename='images/Kirshan bhai.jpg') }}" alt="Network Error" style="height: 50px; width: 50px; border-radius: 50%;" id="profile-img">
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        {% block content %}
+        <p style="color: red;">Test will appear here. Lorem ipsum dolor sit amet consectetur adipisicing elit...</p>
+        {% endblock %}
+    </div>
+    <div class="hidden-div" id="hidden-div">
+        <a href="/" style="color: #ccc; text-decoration: none; margin-left: 230px;">X</a>
+        <h1 style="text-align: center;">Profile</h1>
+        <img src="{{ url_for('static', filename='images/kirshan bhai.jpg') }}" alt="Network Error" style="height: 80px; width: 80px; border-radius: 50%; display: block; margin: 0 auto;">
+        <h3 style="text-align: center;">Kirshan Choudhary</h3>
+        <p style="text-align: center;">Contact Number: 9950107996</p>
+        <p style="font-size: 10px; color: red; font-weight: bold; text-align: center;">You can also pay on this number.</p>
+    </div>
+    <script>
+        document.getElementById('menu-icon').addEventListener('click', function() {
+            document.body.classList.toggle('show-nav');
+        });
+
+        document.getElementById('profile-img').addEventListener('click', function() {
+            var hiddenDiv = document.getElementById('hidden-div');
+            if (hiddenDiv.style.display === 'none' || hiddenDiv.style.display === '') {
+                hiddenDiv.style.display = 'block';
+            } else {
+                hiddenDiv.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

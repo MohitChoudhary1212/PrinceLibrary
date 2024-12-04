@@ -1,0 +1,308 @@
+{% extends 'index.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📘 Prince Library</title>
+    <style>
+        /* Base Styles */
+        body {
+            background-color: skyblue;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .data-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            width: 90%;
+            max-width: 1200px;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid grey;
+        }
+
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        .button-container {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        button {
+            margin-left: 10px;
+            font-weight: bold;
+            border-radius: 4px;
+            border: 0.2px solid grey;
+            height: 30px;
+            cursor: pointer;
+            padding: 0 15px;
+        }
+
+        .btn-add, .btn-add1 {
+            background-color: wheat;
+        }
+
+        .btn-add:hover, .btn-add1:hover {
+            background-color: rgb(235, 206, 152);
+        }
+
+        .btn-update {
+            background: radial-gradient(black pink, yellowgreen, yellow, gold, silver);
+            color: white;
+        }
+
+        .btn-cancel {
+            background-color: white;
+        }
+
+        /* Form Styling */
+        form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: space-between;
+        }
+
+        form div {
+            flex: 1;
+            min-width: 180px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            height: 30px;
+            border-radius: 3px;
+            border: 0.2px solid grey;
+            background-color: white;
+            padding-left: 5px;
+        }
+
+        .btn-add1 {
+            display: block;
+            margin: 30px auto;
+        }
+
+        /* Header Styling */
+        .header {
+            background-color: lightblue;
+            height: 320px;
+            border-radius: 5px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .header h1 {
+            color: blanchedalmond;
+        }
+
+        .header div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .header a {
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: bold;
+            background-color: wheat;
+            border-radius: 5px;
+            padding: 5px 15px;
+            border: 1px solid black;
+            color: black;
+        }
+
+        /* Media Queries for Responsiveness */
+        @media screen and (max-width: 768px) {
+            .header {
+                height: auto;
+                padding: 20px;
+            }
+
+            .header div {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            form {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            table th, table td {
+                padding: 8px;
+                font-size: 14px;
+            }
+
+            .btn-add1 {
+                margin-left: 0;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .data-container {
+                width: 95%;
+            }
+
+            table th, table td {
+                padding: 5px;
+                font-size: 12px;
+            }
+
+            input {
+                font-size: 14px;
+            }
+
+            button {
+                padding: 0 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <div>
+        <h1>Information</h1>
+        <button id="addButton" class="btn-add1">+ Add New</button>
+        <a href="/logout">Logout</a>
+    </div>
+
+    <div id="ddd" style="display: none;">
+        <form id="machineForm" action="/information" method="POST">
+            <input type="hidden" id="key" name="key">
+            <div>
+                <label>Student name<span style="color: red;">*</span></label>
+                <input id="StudentName" type="text" required name="Student Name">
+            </div>
+            <div>
+                <label>Father's name<span style="color: red;">*</span></label>
+                <input id="FatherName" required name="Father Name" type="text">
+            </div>
+            <div>
+                <label>Address</label>
+                <input id="Address" required name="Address" type="text">
+            </div>
+            <div>
+                <label>Amount</label>
+                <input id="Amount" required name="Amount" type="number" value="500" readonly>
+            </div>
+            <div>
+                <label>Join Date</label>
+                <input id="Join" required name="Join" type="date">
+            </div>
+            <div>
+                <label>Mob.no<span style="color: red;">*</span></label>
+                <input id="Mob" type="number" required name="mobile">
+            </div>
+            <div class="button-container">
+                <button id="submitButton" class="btn-add" type="submit">Create</button>
+                <button id="cancelButton" class="btn-cancel" type="button">Cancel</button>
+            </div>
+        </form>
+    </div>
+    <div class="data-container">
+        <h1>Student Data</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Father's Name</th>
+                    <th>Address</th>
+                    <th>Amount</th>
+                    <th>Join Date</th>
+                    <th>Mob.no</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in sachin %}
+                <tr>
+                    <td>{{ entry['Student_Name'] }}</td>
+                    <td>{{ entry['Father_Name'] }}</td>
+                    <td>{{ entry['Address'] }}</td>
+                    <td>{{ entry['Amount'] }}</td>
+                    <td>{{ entry['Join_Date'] }}</td>
+                    <td>{{ entry['Mob_No'] }}</td>
+                    <td>
+                        <td>
+                            <a href="/information/delete?record_id={{ entry['key'] }}" onclick="return confirmDelete();">Delete</a>
+                        </td>
+                        
+                        
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    document.getElementById('addButton').addEventListener('click', function() {
+        document.getElementById('ddd').style.display = 'block';
+        document.getElementById('submitButton').textContent = 'Create';
+        document.getElementById('machineForm').reset();
+    });
+
+    document.getElementById('cancelButton').addEventListener('click', function() {
+        document.getElementById('ddd').style.display = 'none';
+        document.getElementById('machineForm').reset();
+    });
+
+    function confirmDelete() {
+        return confirm("Are you sure you want to delete this machine?");
+    }
+
+    function editMachine(key, studentName, fatherName, address, amount, joinDate, mobile) {
+        document.getElementById('ddd').style.display = 'block';
+        document.getElementById('key').value = key;
+        document.getElementById('StudentName').value = studentName;
+        document.getElementById('FatherName').value = fatherName; 
+        document.getElementById('Address').value = address;
+        document.getElementById('Amount').value = amount;
+        document.getElementById('Join').value = joinDate;
+        document.getElementById('Mob').value = mobile;
+        document.getElementById('submitButton').textContent = 'Update';
+    }
+</script>
+</body>
+</html>
+{%endblock%}

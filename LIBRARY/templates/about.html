@@ -1,0 +1,149 @@
+{%extends 'index.html'%}
+{%block content%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        header {
+            background-color: blue;
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        .about-us {
+            padding: 2em;
+            background: skyblue;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: skyblue;
+        }
+
+        .images {
+            display: flex;
+            gap: 1em;
+            margin-bottom: 2em;
+            flex-wrap: wrap; /* Makes images wrap on smaller screens */
+            justify-content: center; /* Center align on small screens */
+        }
+
+        .images img {
+            width: 100%; /* Image takes up 100% of the container width */
+            max-width: 300px; /* But no larger than 300px */
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .text {
+            max-width: 800px;
+            text-align: center;
+            margin-top: 2em;
+        }
+
+        .text h2 {
+            margin-top: 0;
+            color: blue;
+        }
+
+        .text p {
+            line-height: 1.6;
+            margin: 0.5em 0;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+            width: 100%;
+        }
+
+        marquee {
+            margin-top: 1em;
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1em;
+            }
+
+            .images img {
+                max-width: 100%;
+                margin-bottom: 1em;
+            }
+
+            .text {
+                padding: 0 1em;
+            }
+
+            footer {
+                position: relative; /* Changes from absolute to relative */
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                font-size: 1.2em;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            .text {
+                margin-top: 1em;
+            }
+
+            marquee {
+                font-size: 0.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>About Us</h1>
+    </header>
+    <section class="about-us">
+        <div class="container">
+            <div class="images">
+                <img src="{{ url_for('static', filename='images/Screenshot 2024-09-04 234956.png')}}" alt="Image 1">
+                <img src="{{ url_for('static', filename='images/Screenshot 2024-09-05 092921.png')}}" alt="Image 2">
+                <img src="{{ url_for('static', filename='images/Screenshot 2024-09-05 093516.png')}}" alt="Image 3">
+            </div>
+            <div class="text">
+                <h2>About us</h2>
+                <p>Prince Library is a modern resource center designed to support educational and research needs. Offering a wide range of books, digital resources, and academic journals, it serves students, faculty, and the community. With quiet study areas, collaborative spaces, and access to cutting-edge technology, the library fosters a conducive environment for learning. Its digital catalog allows users to access materials remotely, making research more accessible. In addition to physical resources, the library hosts workshops, seminars, and events that enhance academic skills and knowledge. The Prince Library stands as a hub for intellectual growth and community engagement.</p>
+            </div>
+        </div>
+        <marquee> &copy; 2024 Prince Library. All rights reserved.</marquee>
+    </section>
+    <footer>
+        &copy; 2024 Prince Library. All rights reserved.
+    </footer>
+</body>
+</html>
+
+{%endblock%}
